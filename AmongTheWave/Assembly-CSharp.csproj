@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{7CBC25F2-09C8-A1C3-6323-785341D82858}</ProjectGuid>
+    <ProjectGuid>{C7808930-C949-7625-74F4-895B62167F60}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Camera\AutoCamera.cs" />
+     <Compile Include="Assets\Scripts\NewWaterPhysics\Boat.cs" />
      <Compile Include="Assets\Scripts\Stuff\ExtendedFlycam.cs" />
      <Compile Include="Assets\Scripts\WaterPhysics\Original\BoatController.cs" />
      <Compile Include="Assets\Scripts\WaterPhysics\Original\BoatEngine.cs" />

@@ -31,12 +31,6 @@ public class AutoCamera : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		Vector3 mov = (target.position + offset) - transform.position;
-		mov.y = 0;
-
-		if (mov.magnitude > leniencyLimit) {
-			float movMagn = Mathf.Lerp (0, mov.magnitude, lerpForce * Time.fixedDeltaTime);
-			transform.position += mov.normalized * movMagn;
-		}
+		transform.position = target.position;
 	}
 }
