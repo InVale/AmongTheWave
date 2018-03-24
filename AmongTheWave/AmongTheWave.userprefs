@@ -1,12 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\WaterPhysics\Original\ModifyBoatMesh.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Camera\AutoCamera.cs">
     <Files>
-      <File FileName="Assets\Scripts\Camera\AutoCamera.cs" Line="34" Column="40" />
-      <File FileName="Assets\Scripts\NewWaterPhysics\Boat.cs" Line="40" Column="23" />
-      <File FileName="Assets\Scripts\Stuff\ExtendedFlycam.cs" Line="66" Column="101" />
-      <File FileName="Assets\Scripts\WaterPhysics\Original\BoatPhysicsMath.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\WaterPhysics\Original\ModifyBoatMesh.cs" Line="147" Column="48" />
+      <File FileName="Assets\Scripts\Camera\AutoCamera.cs" Line="32" Column="41" />
+      <File FileName="Assets\Scripts\NewWaterPhysics\Boat.cs" Line="116" Column="38" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
