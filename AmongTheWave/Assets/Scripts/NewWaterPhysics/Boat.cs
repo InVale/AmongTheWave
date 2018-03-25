@@ -6,19 +6,27 @@ using Sirenix.OdinInspector;
 public class Boat : MonoBehaviour {
 
 	//Debug
-	[Header("Debug")]
-	[ReadOnly, SerializeField]
+	[FoldoutGroup("Debug")]
+	public Vector2 stream;
+
+	[ReadOnly, SerializeField, FoldoutGroup("Debug"), Space]
 	float currentVelocity;
-	[ReadOnly, SerializeField]
+	[ReadOnly, SerializeField, FoldoutGroup("Debug")]
 	float currentAcceleration = 1;
-	[ReadOnly, SerializeField]
+	[ReadOnly, SerializeField, FoldoutGroup("Debug")]
 	float currentTurnSpeed;
-	[ReadOnly, SerializeField]
+	[ReadOnly, SerializeField, FoldoutGroup("Debug")]
 	float currentTurnDrag;
+
+	[ReadOnly, SerializeField, FoldoutGroup("Debug"), Space]
+	float angleToStream;
+	[ReadOnly, SerializeField, FoldoutGroup("Debug")]
+	float currentMaxAngle;
+	[ReadOnly, SerializeField, FoldoutGroup("Debug")]
+	float rFactor;
 
 	//Public
 	[Header("Tweak")]
-	public Vector2 current;
 	public float size;
 	public float accelerationFactor;
 	[Space]
@@ -30,6 +38,10 @@ public class Boat : MonoBehaviour {
 	public float turnFactor;
 	public float turnDragFactor;
 	public float referenceVelocity;
+	[Space]
+	public TurnCalculTypeEnum turnAngleCalcul;
+	public float turnMaxAngle;
+	public float turnAngleFactor;
 
 	[Header("References")]
 	public Transform rudder;
@@ -87,37 +99,54 @@ public class Boat : MonoBehaviour {
 		rot.z = 0;
 		transform.eulerAngles = rot;
 
+		Rotation ();
+
 		if (!_immobile) {
 			//Calculate Trajectory
-			Vector3 mov = new Vector3(current.x, 0, current.y);
+			Vector3 mov = new Vector3(stream.x, 0, stream.y);
 			mov *= size * currentAcceleration;
-
-			//Calculate Turn Factor
-			float tFactor = 1;
-			float dFactor = 1;
-			if (turnFactorCalcul == TurnCalculTypeEnum.ADDITIVE) {
-				float factor = _rb.velocity.magnitude / referenceVelocity;
-				tFactor += factor * turnFactor;
-				if (tFactor <= 0)
-					Debug.Log("Your turnFactor value is too negative for additive calcul considering the reachable speed, factor ended up being negative.");
-				dFactor += factor * turnDragFactor;
-			}
-			else if (turnFactorCalcul == TurnCalculTypeEnum.MULTIPLICATIVE) {
-				tFactor = Mathf.Pow (turnFactor, (_rb.velocity.magnitude / referenceVelocity));
-				dFactor = Mathf.Pow (turnDragFactor, (_rb.velocity.magnitude / referenceVelocity));
-			}
-				
-			//Add Forces
-			currentTurnSpeed = tFactor * turnSpeed * Input.GetAxis ("Horizontal");
-			_rb.AddTorque (Vector3.up * currentTurnSpeed);
 			_rb.AddForce (mov.magnitude * transform.forward);
-		
-			currentTurnDrag = dFactor * turnDrag;
-			_rb.angularDrag = currentTurnDrag;
 		}
 
 		currentVelocity = _rb.velocity.magnitude;
 		//_anim.SetFloat("ForwardSpeed")
+	}
 
+	void Rotation () {
+		float factor = _rb.velocity.magnitude / referenceVelocity;
+
+		//Calculate Turn Factor
+		float tFactor = 1;
+		float dFactor = 1;
+		if (turnFactorCalcul == TurnCalculTypeEnum.ADDITIVE) {
+			tFactor += factor * turnFactor;
+			if (tFactor <= 0)
+				Debug.Log("Your turnFactor value is too negative for additive calcul considering the reachable speed, factor ended up being negative.");
+			dFactor += factor * turnDragFactor;
+		}
+		else if (turnFactorCalcul == TurnCalculTypeEnum.MULTIPLICATIVE) {
+			tFactor = Mathf.Pow (turnFactor, factor);
+			dFactor = Mathf.Pow (turnDragFactor, factor);
+		}
+
+		//Calculate Water Resistance
+		if (turnAngleCalcul == TurnCalculTypeEnum.ADDITIVE) {
+			float buffer = 1 + factor * turnMaxAngle;
+			if (tFactor <= 0)
+				Debug.Log("Your turnFactor value is too negative for additive calcul considering the reachable speed, factor ended up being negative.");
+			currentMaxAngle = turnMaxAngle * buffer;
+		}
+		else if (turnAngleCalcul == TurnCalculTypeEnum.MULTIPLICATIVE) {
+			currentMaxAngle = turnMaxAngle * Mathf.Pow (turnAngleFactor, factor);
+		}
+		angleToStream = Vector2.SignedAngle(stream.normalized, new Vector2(transform.forward.x, transform.forward.z));
+		rFactor = angleToStream / currentMaxAngle;
+
+		//Add Forces
+		currentTurnSpeed = tFactor * turnSpeed * (Input.GetAxis ("Horizontal") + rFactor);
+		_rb.AddTorque (Vector3.up * currentTurnSpeed);
+
+		currentTurnDrag = dFactor * turnDrag;
+		_rb.angularDrag = currentTurnDrag;
 	}
 }

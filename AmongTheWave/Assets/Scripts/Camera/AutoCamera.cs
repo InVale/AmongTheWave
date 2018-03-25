@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class AutoCamera : MonoBehaviour {
 
@@ -9,8 +10,12 @@ public class AutoCamera : MonoBehaviour {
 	//[Header("Camera Parameters")]
 
 	[Header("Camera Tweaking")]
+	public bool canControl;
+	[ShowIf("canControl")]
 	public Vector2 turnLimit;
+	[ShowIf("canControl")]
 	public float cameraSpeed;
+	[ShowIf("canControl")]
 	public AnimationCurve turnEase;
 
 	[Header("References")]
@@ -25,16 +30,18 @@ public class AutoCamera : MonoBehaviour {
 	}
 
 	void Update () {
-		float xAxis = Input.GetAxis ("Camera Horizontal");
-		float yAxis = Input.GetAxis ("Camera Vertical");
+		if (canControl) {
+			float xAxis = Input.GetAxis ("Camera Horizontal");
+			float yAxis = Input.GetAxis ("Camera Vertical");
 
-		currentX = MoveAxis (xAxis, currentX);
-		currentY = MoveAxis (yAxis, currentY);
+			currentX = MoveAxis (xAxis, currentX);
+			currentY = MoveAxis (yAxis, currentY);
 
-		float x = Mathf.Sign (currentX) * turnEase.Evaluate (Mathf.Abs (currentX)) * turnLimit.x;
-		float y = Mathf.Sign (currentY) * turnEase.Evaluate (Mathf.Abs (currentY)) * turnLimit.y;
+			float x = Mathf.Sign (currentX) * turnEase.Evaluate (Mathf.Abs (currentX)) * turnLimit.x;
+			float y = Mathf.Sign (currentY) * turnEase.Evaluate (Mathf.Abs (currentY)) * turnLimit.y;
 
-		actualCamera.transform.localEulerAngles = new Vector3(y, x, 0);
+			actualCamera.transform.localEulerAngles = new Vector3(y, x, 0);
+		}
 	}
 
 	float MoveAxis (float axis, float current) {
