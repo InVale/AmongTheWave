@@ -24,9 +24,11 @@ public class AutoCamera : MonoBehaviour {
 	Camera _cam;
 	float currentX;
 	float currentY;
+	Vector3 baseRotGlobal;
 
 	void Start () {
 		_cam = actualCamera.GetComponent<Camera> ();
+		baseRotGlobal = actualCamera.transform.eulerAngles;
 	}
 
 	void Update () {
@@ -40,7 +42,15 @@ public class AutoCamera : MonoBehaviour {
 			float x = Mathf.Sign (currentX) * turnEase.Evaluate (Mathf.Abs (currentX)) * turnLimit.x;
 			float y = Mathf.Sign (currentY) * turnEase.Evaluate (Mathf.Abs (currentY)) * turnLimit.y;
 
-			actualCamera.transform.localEulerAngles = new Vector3(y, x, 0);
+			Vector3 rotGlobal = baseRotGlobal;
+			rotGlobal.y += x;
+			actualCamera.transform.eulerAngles = rotGlobal;
+
+			Vector3 rotLocal = actualCamera.transform.localEulerAngles;
+			rotLocal.x = y;
+			actualCamera.transform.localEulerAngles = rotLocal;
+
+
 		}
 	}
 
@@ -48,9 +58,9 @@ public class AutoCamera : MonoBehaviour {
 		if (axis == 0 && current == 0)
 			return 0;
 
-		float dir = (axis > currentX) ? 1 : -1;
+		float dir = (axis > current) ? 1 : -1;
 		current += dir * cameraSpeed * Time.deltaTime;
-		float pos = (axis > currentX) ? 1 : -1;
+		float pos = (axis > current) ? 1 : -1;
 		current = (pos != dir) ? axis : current;
 		return current;
 	}

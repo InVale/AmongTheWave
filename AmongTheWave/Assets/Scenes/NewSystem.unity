@@ -2638,53 +2638,8 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
         type: 2}
-      propertyPath: velocity
+      propertyPath: currentVelocity
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
-        type: 2}
-      propertyPath: accelerator
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
-        type: 2}
-      propertyPath: turnSpeed
-      value: 700
-      objectReference: {fileID: 0}
-    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
-        type: 2}
-      propertyPath: turnFactor
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 54859850688613300, guid: 7722aa8f915ef374bb61035d7871c586,
-        type: 2}
-      propertyPath: m_AngularDrag
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
-        type: 2}
-      propertyPath: turnFactorCalcul
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
-        type: 2}
-      propertyPath: referenceVelocity
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
-        type: 2}
-      propertyPath: turnDragFactor
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
-        type: 2}
-      propertyPath: turnDrag
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
-        type: 2}
-      propertyPath: turnMaxAngle
-      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
         type: 2}
@@ -2703,37 +2658,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
         type: 2}
-      propertyPath: stream.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
-        type: 2}
-      propertyPath: currentVelocity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
-        type: 2}
-      propertyPath: rFactor
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
-        type: 2}
       propertyPath: angleToStream
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
         type: 2}
-      propertyPath: turnAngleFactor
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
-        type: 2}
-      propertyPath: turnAngleCalcul
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
-        type: 2}
       propertyPath: currentMaxAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
+        type: 2}
+      propertyPath: rFactor
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2911,7 +2846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1847820309}
-  canControl: 0
+  canControl: 1
   turnLimit: {x: 20, y: 10}
   cameraSpeed: 0.5
   turnEase:
