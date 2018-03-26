@@ -5,10 +5,14 @@ using Sirenix.OdinInspector;
 
 public class FloatingObjectAnimations : MonoBehaviour {
 
+	[ReadOnly, SerializeField, FoldoutGroup("Debug"), Space]
+	float currentFloatValue;
+	[ReadOnly, SerializeField, FoldoutGroup("Debug")]
+	float currentSideAngle;
 	[ReadOnly, SerializeField, FoldoutGroup("Debug")]
 	float aimedSideAngle;
 	[ReadOnly, SerializeField, FoldoutGroup("Debug")]
-	float currentSideAngle;
+	float currentSideGravity;
 
 	[Header("Basic Floating")]
 	public float restStrenght;
@@ -21,29 +25,37 @@ public class FloatingObjectAnimations : MonoBehaviour {
 	public float sideGravity;
 	public float sideDrag;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
 	void FixedUpdate () {
 		Buoyancy ();
 		Pendulum ();
 	}
 
 	void Buoyancy () {
-		float value = restCurve.Evaluate ((Time.time % restLength) / restLength) * restStrenght;
+		currentFloatValue = restCurve.Evaluate ((Time.time % restLength) / restLength) * restStrenght;
 		Vector3 pos = transform.position;
-		pos.y = value;
+		pos.y = currentFloatValue;
 		transform.position = pos;
 	}
 
 	void Pendulum () {
-		//if ()
+		float sign = (aimedSideAngle != 0) ? Mathf.Sign(aimedSideAngle) : ((currentSideAngle != 0 ) ? Mathf.Sign(currentSideAngle) : 0);
+
+		if (sign != 0 && (sign * currentSideAngle <= sign * aimedSideAngle)) {
+			float factor = (aimedSideAngle - currentSideAngle) / aimedSideAngle;
+			factor *= sign;
+			currentSideAngle += factor * sideSpeed * Time.fixedDeltaTime;
+			currentSideGravity = 0;
+		}
+		else {
+			currentSideGravity += sideGravity * Time.fixedDeltaTime * sign;
+			currentSideGravity *= (1 - Time.fixedDeltaTime * sideDrag); //Drag Formula ! Fucking useful !
+			currentSideAngle -= currentSideGravity * Time.fixedDeltaTime;
+		}
+
+		transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, currentSideAngle);
 	}
 
 	public void SetSideMovement (float force) {
-		aimedSideAngle = force / sideStrenght;
+		aimedSideAngle = -force * sideStrenght;
 	}
 }

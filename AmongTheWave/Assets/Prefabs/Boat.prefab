@@ -304,3 +304,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ebdefb167a7cf4895ab6c7a94508f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentFloatValue: 0
+  currentSideAngle: 0
+  aimedSideAngle: 0
+  currentSideGravity: 0
+  restStrenght: 0.1
+  restLength: 5
+  restCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0.2
+      inSlope: -2.4860067
+      outSlope: -2.4860067
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.4
+      value: -0.7
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 1
+      value: 0.2
+      inSlope: -3.9367857
+      outSlope: -3.9367857
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  sideStrenght: 0.02
+  sideSpeed: 5
+  sideGravity: 5
+  sideDrag: 2

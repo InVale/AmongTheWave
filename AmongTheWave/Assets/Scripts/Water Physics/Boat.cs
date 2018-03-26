@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(FloatingObjectAnimations))]
 public class Boat : MonoBehaviour {
 
 	//Debug
@@ -96,10 +98,6 @@ public class Boat : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		Vector3 rot = transform.eulerAngles;
-		rot.x = 0;
-		rot.z = 0;
-		transform.eulerAngles = rot;
 
 		Rotation ();
 
@@ -146,7 +144,7 @@ public class Boat : MonoBehaviour {
 		//Add Forces
 		currentTurnSpeed = tFactor * turnSpeed * (Input.GetAxis ("Horizontal") + rFactor);
 		_rb.AddTorque (Vector3.up * currentTurnSpeed);
-		_floatAnim.SetSideMovement (turnSpeed);
+		_floatAnim.SetSideMovement (tFactor * turnSpeed * Input.GetAxis ("Horizontal"));
 
 		currentTurnDrag = dFactor * turnDrag;
 		_rb.angularDrag = currentTurnDrag;
