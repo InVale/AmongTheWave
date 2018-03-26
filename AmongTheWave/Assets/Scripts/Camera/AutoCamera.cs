@@ -49,8 +49,6 @@ public class AutoCamera : MonoBehaviour {
 			Vector3 rotLocal = actualCamera.transform.localEulerAngles;
 			rotLocal.x = y;
 			actualCamera.transform.localEulerAngles = rotLocal;
-
-
 		}
 	}
 
@@ -66,6 +64,6 @@ public class AutoCamera : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		transform.position = target.position;
+		transform.position = new Vector3(target.position.x, transform.position.y, target.position.z);
 	}
 }

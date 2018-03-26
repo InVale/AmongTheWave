@@ -8,6 +8,8 @@ public class Boat : MonoBehaviour {
 	//Debug
 	[FoldoutGroup("Debug")]
 	public Vector2 stream;
+	[FoldoutGroup("Debug")]
+	public bool immobile;
 
 	[ReadOnly, SerializeField, FoldoutGroup("Debug"), Space]
 	float currentVelocity;
@@ -48,9 +50,8 @@ public class Boat : MonoBehaviour {
 
 	//Internal
 	Rigidbody _rb;
-	Animator _anim;
+	FloatingObjectAnimations _floatAnim;
 
-	bool _immobile = false;
 	float _currentDir = 0;
 
 	public enum TurnCalculTypeEnum {
@@ -61,14 +62,14 @@ public class Boat : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_rb = GetComponent<Rigidbody> ();
-		_anim = GetComponent<Animator> ();
+		_floatAnim = GetComponent<FloatingObjectAnimations> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
 		if (Input.GetButtonDown ("Fire1")) {
-			//_immobile = !_immobile;
+			//immobile = !immobile;
 		}
 
 		if (Input.GetButtonDown ("Accelerate"))
@@ -102,15 +103,14 @@ public class Boat : MonoBehaviour {
 
 		Rotation ();
 
-		if (!_immobile) {
+		if (!immobile) {
 			//Calculate Trajectory
 			Vector3 mov = new Vector3(stream.x, 0, stream.y);
 			mov *= size * currentAcceleration;
 			_rb.AddForce (mov.magnitude * transform.forward);
 		}
-
+			
 		currentVelocity = _rb.velocity.magnitude;
-		//_anim.SetFloat("ForwardSpeed")
 	}
 
 	void Rotation () {
@@ -122,7 +122,7 @@ public class Boat : MonoBehaviour {
 		if (turnFactorCalcul == TurnCalculTypeEnum.ADDITIVE) {
 			tFactor += factor * turnFactor;
 			if (tFactor <= 0)
-				Debug.Log("Your turnFactor value is too negative for additive calcul considering the reachable speed, factor ended up being negative.");
+				Debug.Log("Your turnFactor value is too negative for additive calcul considering the reachable speed; factor ended up being negative.");
 			dFactor += factor * turnDragFactor;
 		}
 		else if (turnFactorCalcul == TurnCalculTypeEnum.MULTIPLICATIVE) {
@@ -132,9 +132,9 @@ public class Boat : MonoBehaviour {
 
 		//Calculate Water Resistance
 		if (turnAngleCalcul == TurnCalculTypeEnum.ADDITIVE) {
-			float buffer = 1 + factor * turnMaxAngle;
+			float buffer = 1 + factor * turnAngleFactor;
 			if (tFactor <= 0)
-				Debug.Log("Your turnFactor value is too negative for additive calcul considering the reachable speed, factor ended up being negative.");
+				Debug.Log("Your turnAngleFactor value is too negative for additive calcul considering the reachable speed; factor ended up being negative.");
 			currentMaxAngle = turnMaxAngle * buffer;
 		}
 		else if (turnAngleCalcul == TurnCalculTypeEnum.MULTIPLICATIVE) {
@@ -146,6 +146,7 @@ public class Boat : MonoBehaviour {
 		//Add Forces
 		currentTurnSpeed = tFactor * turnSpeed * (Input.GetAxis ("Horizontal") + rFactor);
 		_rb.AddTorque (Vector3.up * currentTurnSpeed);
+		_floatAnim.SetSideMovement (turnSpeed);
 
 		currentTurnDrag = dFactor * turnDrag;
 		_rb.angularDrag = currentTurnDrag;
