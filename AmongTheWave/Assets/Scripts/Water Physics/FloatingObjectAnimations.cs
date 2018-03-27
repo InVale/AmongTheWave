@@ -5,14 +5,14 @@ using Sirenix.OdinInspector;
 
 public class FloatingObjectAnimations : MonoBehaviour {
 
-	[ReadOnly, SerializeField, FoldoutGroup("Debug"), Space]
-	float currentFloatValue;
 	[ReadOnly, SerializeField, FoldoutGroup("Debug")]
+	float currentBuoyancyValue;
+	[ReadOnly, SerializeField, FoldoutGroup("Debug"), Space]
 	float currentSideAngle;
 	[ReadOnly, SerializeField, FoldoutGroup("Debug")]
 	float aimedSideAngle;
 	[ReadOnly, SerializeField, FoldoutGroup("Debug")]
-	float currentSideGravity;
+	float currentSideAngularVelocity;
 
 	[Header("Basic Floating")]
 	public float restStrenght;
@@ -31,26 +31,25 @@ public class FloatingObjectAnimations : MonoBehaviour {
 	}
 
 	void Buoyancy () {
-		currentFloatValue = restCurve.Evaluate ((Time.time % restLength) / restLength) * restStrenght;
+		currentBuoyancyValue = restCurve.Evaluate ((Time.time % restLength) / restLength) * restStrenght;
 		Vector3 pos = transform.position;
-		pos.y = currentFloatValue;
+		pos.y = currentBuoyancyValue;
 		transform.position = pos;
 	}
 
 	void Pendulum () {
-		float sign = (aimedSideAngle != 0) ? Mathf.Sign(aimedSideAngle) : ((currentSideAngle != 0 ) ? Mathf.Sign(currentSideAngle) : 0);
-
-		if (sign != 0 && (sign * currentSideAngle <= sign * aimedSideAngle)) {
-			float factor = (aimedSideAngle - currentSideAngle) / aimedSideAngle;
-			factor *= sign;
-			currentSideAngle += factor * sideSpeed * Time.fixedDeltaTime;
-			currentSideGravity = 0;
+		if (aimedSideAngle != 0) {
+			float sign = Mathf.Sign(aimedSideAngle);
+			float factor = 1 - (currentSideAngle / aimedSideAngle);
+			currentSideAngularVelocity += factor * sign * sideSpeed * Time.fixedDeltaTime;
 		}
 		else {
-			currentSideGravity += sideGravity * Time.fixedDeltaTime * sign;
-			currentSideGravity *= (1 - Time.fixedDeltaTime * sideDrag); //Drag Formula ! Fucking useful !
-			currentSideAngle -= currentSideGravity * Time.fixedDeltaTime;
+			float sign = (currentSideAngle != 0 ) ? Mathf.Sign(currentSideAngle) : 0;
+			currentSideAngularVelocity -= sideGravity * Time.fixedDeltaTime * sign;
 		}
+
+		currentSideAngularVelocity *= (1 - Time.fixedDeltaTime * sideDrag); //Drag Formula ! Fucking useful !
+		currentSideAngle += currentSideAngularVelocity * Time.fixedDeltaTime;
 
 		transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, currentSideAngle);
 	}

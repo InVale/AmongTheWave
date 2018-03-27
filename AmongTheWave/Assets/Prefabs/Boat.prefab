@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stream: {x: 0, y: 1}
-  immobile: 1
+  immobile: 0
   currentVelocity: 0
   currentAcceleration: 1
   currentTurnSpeed: 0
@@ -282,15 +282,15 @@ MonoBehaviour:
   rFactor: 0
   size: 1000
   accelerationFactor: 5
-  turnSpeed: 700
-  turnDrag: 2
+  turnSpeed: 400
+  turnDrag: 4
   rudderSpeed: 50
   turnFactorCalcul: 0
-  turnFactor: 3
+  turnFactor: 12
   turnDragFactor: 1
   referenceVelocity: 10
   turnAngleCalcul: 1
-  turnMaxAngle: 45
+  turnMaxAngle: 35
   turnAngleFactor: 0.8
   rudder: {fileID: 4267086418829076}
 --- !u!114 &114547686547063296
@@ -304,37 +304,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ebdefb167a7cf4895ab6c7a94508f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentFloatValue: 0
+  currentBuoyancyValue: 0
   currentSideAngle: 0
   aimedSideAngle: 0
-  currentSideGravity: 0
-  restStrenght: 0.1
-  restLength: 5
+  currentSideAngularVelocity: 0
+  restStrenght: 0.2
+  restLength: 6
   restCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
       value: 0.2
-      inSlope: -2.4860067
-      outSlope: -2.4860067
+      inSlope: -0.040196784
+      outSlope: -0.040196784
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.4
-      value: -0.7
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
+      time: 0.2
+      value: -0.3
+      inSlope: -0.55618584
+      outSlope: -0.55618584
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.5
+      value: 0.3
+      inSlope: -0.039476946
+      outSlope: -0.039476946
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.75
+      value: -0.3
+      inSlope: -0.009462237
+      outSlope: -0.009462237
+      tangentMode: 0
     - serializedVersion: 2
       time: 1
       value: 0.2
-      inSlope: -3.9367857
-      outSlope: -3.9367857
+      inSlope: -0.011306538
+      outSlope: -0.011306538
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
-  sideStrenght: 0.02
-  sideSpeed: 5
-  sideGravity: 5
+  sideStrenght: 0.002
+  sideSpeed: 12
+  sideGravity: 60
   sideDrag: 2

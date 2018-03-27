@@ -2769,24 +2769,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1847820309}
-  canControl: 1
-  turnLimit: {x: 20, y: 10}
-  cameraSpeed: 0.5
+  canControl: 0
+  turnLimit: {x: 10, y: 5}
+  cameraSpeed: 0.25
   turnEase:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
       value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -3740,6 +3740,61 @@ Prefab:
     - target: {fileID: 4039715797201674, guid: 7722aa8f915ef374bb61035d7871c586, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
+        type: 2}
+      propertyPath: currentVelocity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
+        type: 2}
+      propertyPath: currentAcceleration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
+        type: 2}
+      propertyPath: currentTurnSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
+        type: 2}
+      propertyPath: currentTurnDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
+        type: 2}
+      propertyPath: angleToStream
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
+        type: 2}
+      propertyPath: currentMaxAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114515869709542508, guid: 7722aa8f915ef374bb61035d7871c586,
+        type: 2}
+      propertyPath: rFactor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114547686547063296, guid: 7722aa8f915ef374bb61035d7871c586,
+        type: 2}
+      propertyPath: currentBuoyancyValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114547686547063296, guid: 7722aa8f915ef374bb61035d7871c586,
+        type: 2}
+      propertyPath: currentSideAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114547686547063296, guid: 7722aa8f915ef374bb61035d7871c586,
+        type: 2}
+      propertyPath: aimedSideAngle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114547686547063296, guid: 7722aa8f915ef374bb61035d7871c586,
+        type: 2}
+      propertyPath: currentSideAngularVelocity
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7722aa8f915ef374bb61035d7871c586, type: 2}
