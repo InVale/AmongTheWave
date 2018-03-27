@@ -14,12 +14,19 @@ public class FloatingObjectAnimations : MonoBehaviour {
 	[ReadOnly, SerializeField, FoldoutGroup("Debug")]
 	float currentSideAngularVelocity;
 
-	[Header("Basic Floating")]
+	[Header("Basic Buoyancy")]
 	public float restStrenght;
 	public float restLength;
 	public AnimationCurve restCurve;
 
-	[Header("Basic Floating")]
+	[Header("High Speed Buoyancy")]
+	public float fastSpeedReference;
+	public float fastStrenght;
+	public float fastLenght;
+	public AnimationCurve fastCurve;
+
+
+	[Header("Side Tilt")]
 	public float sideStrenght;
 	public float sideSpeed;
 	public float sideGravity;

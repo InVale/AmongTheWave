@@ -70,8 +70,8 @@ public class Boat : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetButtonDown ("Fire1")) {
-			//immobile = !immobile;
+		if (Input.GetButtonDown ("Start")) {
+			immobile = !immobile;
 		}
 
 		if (Input.GetButtonDown ("Accelerate"))

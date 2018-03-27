@@ -3,8 +3,8 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Water Physics\FloatingObjectAnimations.cs">
     <Files>
       <File FileName="Assets\Scripts\Camera\AutoCamera.cs" Line="45" Column="38" />
-      <File FileName="Assets\Scripts\Water Physics\Boat.cs" Line="145" Column="85" />
-      <File FileName="Assets\Scripts\Water Physics\FloatingObjectAnimations.cs" Line="51" Column="71" />
+      <File FileName="Assets\Scripts\Water Physics\Boat.cs" Line="73" Column="39" />
+      <File FileName="Assets\Scripts\Water Physics\FloatingObjectAnimations.cs" Line="25" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
