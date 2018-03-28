@@ -33,6 +33,11 @@ public class Boat : MonoBehaviour {
 	[Header("Tweak")]
 	public float size;
 	public float accelerationFactor;
+	public bool yControl;
+	[ShowIf("yControl")]
+	public float brakeFactor;
+	[ShowIf("yControl")]
+	public float speedFactor;
 	[Space]
 	public float turnSpeed;
 	public float turnDrag;
@@ -102,10 +107,15 @@ public class Boat : MonoBehaviour {
 		Rotation ();
 
 		if (!immobile) {
-			//Calculate Trajectory
+			float factor = 1;
+			if (yControl) {
+				factor = Input.GetAxis ("Vertical");
+				factor = (factor < 0) ? brakeFactor : ((factor > 0) ? speedFactor : 1);
+			}
+
 			Vector3 mov = new Vector3(stream.x, 0, stream.y);
 			mov *= size * currentAcceleration;
-			_rb.AddForce (mov.magnitude * transform.forward);
+			_rb.AddForce (mov.magnitude * transform.forward * factor);
 		}
 			
 		currentVelocity = _rb.velocity.magnitude;
@@ -143,7 +153,7 @@ public class Boat : MonoBehaviour {
 
 		//Add Forces
 		currentTurnSpeed = tFactor * turnSpeed * (Input.GetAxis ("Horizontal") + rFactor);
-		_rb.AddTorque (Vector3.up * currentTurnSpeed);
+		_rb.AddTorque (_floatAnim.boatsNormal * currentTurnSpeed);
 		_floatAnim.SetSideMovement (tFactor * turnSpeed * Input.GetAxis ("Horizontal"));
 
 		currentTurnDrag = dFactor * turnDrag;
