@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using DarkTonic.MasterAudio;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(FloatingObjectAnimations))]
@@ -52,14 +53,20 @@ public class Boat : MonoBehaviour {
 	public float turnMaxAngle;
 	public float turnAngleFactor;
 
+	//[Header("Sound")]
+
 	[Header("References")]
 	public Transform rudder;
+	[SoundGroup]
+	public string boatCreakSound;
 
 	//Internal
 	Rigidbody _rb;
 	FloatingObjectAnimations _floatAnim;
 
 	float _currentDir = 0;
+	float _lastInput = 0;
+	float _lastInputTime;
 
 	public enum TurnCalculTypeEnum {
 		ADDITIVE,
@@ -103,10 +110,9 @@ public class Boat : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-
-		Rotation ();
-
 		if (!immobile) {
+			Rotation ();
+
 			float factor = 1;
 			if (yControl) {
 				factor = Input.GetAxis ("Vertical");
@@ -122,6 +128,7 @@ public class Boat : MonoBehaviour {
 	}
 
 	void Rotation () {
+		float xInput = Input.GetAxis ("Horizontal");
 		float factor = _rb.velocity.magnitude / referenceVelocity;
 
 		//Calculate Turn Factor
@@ -152,11 +159,20 @@ public class Boat : MonoBehaviour {
 		rFactor = angleToStream / currentMaxAngle;
 
 		//Add Forces
-		currentTurnSpeed = tFactor * turnSpeed * (Input.GetAxis ("Horizontal") + rFactor);
+		currentTurnSpeed = tFactor * turnSpeed * (xInput + rFactor);
 		_rb.AddTorque (_floatAnim.boatsNormal * currentTurnSpeed);
-		_floatAnim.SetSideMovement (tFactor * turnSpeed * Input.GetAxis ("Horizontal"));
+		_floatAnim.SetSideMovement (tFactor * turnSpeed * xInput);
 
 		currentTurnDrag = dFactor * turnDrag;
 		_rb.angularDrag = currentTurnDrag;
+
+		//Play Sound
+		if (xInput == 1 || xInput == -1 || xInput == 0) {
+			if (xInput != _lastInput && _lastInputTime <= Time.time) {
+				_lastInputTime = Time.time + 1f;
+				MasterAudio.PlaySound3DAtTransformAndForget(boatCreakSound, transform);
+			} 
+			_lastInput = xInput;
+		}
 	}
 }

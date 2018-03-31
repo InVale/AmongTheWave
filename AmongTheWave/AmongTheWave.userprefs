@@ -1,11 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Water Physics\FloatingObjectAnimations.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Temporary\FadeSong.cs">
     <Files>
-      <File FileName="Assets\Scripts\Camera\AutoCamera.cs" Line="45" Column="38" />
-      <File FileName="Assets\Scripts\Temporary\DisableBoat.cs" Line="9" Column="45" />
-      <File FileName="Assets\Scripts\Temporary\ChangeStream.cs" Line="10" Column="2" />
-      <File FileName="Assets\Scripts\Water Physics\FloatingObjectAnimations.cs" Line="86" Column="2" />
+      <File FileName="Assets\Scripts\Camera\AutoCamera.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Water Physics\Boat.cs" Line="162" Column="63" />
+      <File FileName="Assets\Scripts\Water Physics\FloatingObjectAnimations.cs" Line="123" Column="77" />
+      <File FileName="Assets\Scripts\Temporary\ChangeSong.cs" Line="8" Column="2" />
+      <File FileName="Assets\Scripts\Temporary\FadeSong.cs" Line="18" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

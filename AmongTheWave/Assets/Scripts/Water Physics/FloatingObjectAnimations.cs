@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
+using DarkTonic.MasterAudio;
 
 [RequireComponent(typeof(Rigidbody))]
 public class FloatingObjectAnimations : MonoBehaviour {
@@ -51,13 +52,27 @@ public class FloatingObjectAnimations : MonoBehaviour {
 	public float sideGravity;
 	public float sideDrag;
 
+	[Header("Sound"), SoundGroup]
+	public string waterSound;
+	public AnimationCurve waterVolume;
+	public float waterTimeStamp;
+	[Space]
+	public AudioSource waterAmbient;
+	public float waterAmbientVolumeMultiplier;
+
 	Rigidbody _rb;
 
 	[NonSerialized]
 	public Vector3 boatsNormal = Vector3.up;
 
+	bool _waterCanPlay = true;
+
 	void Start () {
 		_rb = GetComponent<Rigidbody> ();
+	}
+
+	void Update () {
+		waterAmbient.volume = waterVolume.Evaluate ((_rb.velocity.magnitude > fastSpeedReference) ? 1 : _rb.velocity.magnitude / fastSpeedReference) * waterAmbientVolumeMultiplier;
 	}
 
 	void FixedUpdate () {
@@ -103,6 +118,14 @@ public class FloatingObjectAnimations : MonoBehaviour {
 		currentForwardTiltStrength = Mathf.Lerp (0, fastSpeedTiltStrength, currentSpeedFactor);
 
 		currentForwardTiltAngle = fastSpeedTiltCurve.Evaluate (currentBuoyancyAnimationPoint) * currentForwardTiltStrength;
+
+		if ((currentBuoyancyAnimationPoint >= waterTimeStamp) && _waterCanPlay) {
+			MasterAudio.PlaySound3DAtVector3AndForget (waterSound, transform.position, waterVolume.Evaluate ((_rb.velocity.magnitude > fastSpeedReference) ? 1 : _rb.velocity.magnitude / fastSpeedReference));
+			_waterCanPlay = false;
+		}
+		else if (currentBuoyancyAnimationPoint < waterTimeStamp) {
+			_waterCanPlay = true;
+		}
 	}
 
 	public void SetSideMovement (float force) {
