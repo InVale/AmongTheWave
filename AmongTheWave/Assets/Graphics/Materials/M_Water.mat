@@ -104,7 +104,7 @@ Material:
     - _Height022: 0.1
     - _Height_int: -0
     - _Metallic: 0
-    - _Noise_int: 0.5
+    - _Noise_int: 0.4
     - _Normal011: 0.927
     - _Normal011_flatten: 0.96
     - _Normal012: 0.94
