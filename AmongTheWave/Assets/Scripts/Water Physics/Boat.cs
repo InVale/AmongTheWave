@@ -105,7 +105,9 @@ public class Boat : MonoBehaviour {
 			_currentDir += dir * rudderSpeed * Time.deltaTime;
 			_currentDir = (Mathf.Abs(_currentDir) > 45) ? dir * 45 : _currentDir;
 			_currentDir = ((input == 0) && (Mathf.Abs (_currentDir) < 0.15f)) ? 0 : _currentDir;
-			rudder.localEulerAngles = Vector3.up * _currentDir;
+			Vector3 rudRot = rudder.localEulerAngles;
+			rudRot.y = _currentDir;
+			rudder.localEulerAngles = rudRot;
 		}
 	}
 

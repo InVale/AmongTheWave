@@ -9,7 +9,7 @@ public class ChangeStream : MonoBehaviour {
 	
 	void OnTriggerEnter (Collider collider) {
 		if (collider.tag == "Player") {
-			Boat script = collider.transform.parent.GetComponent<Boat> ();
+			Boat script = collider.transform.parent.parent.GetComponent<Boat> ();
 			script.stream = streamDirection.normalized * streamVelocity;
 		}
 	}
