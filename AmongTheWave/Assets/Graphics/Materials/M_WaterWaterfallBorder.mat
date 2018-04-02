@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: M_WaterWaterfallBorder
+  m_Shader: {fileID: 4800000, guid: 02dc03803ebedfa41acfe2cdb3c6579c, type: 3}
+  m_ShaderKeywords: _BORDEROPACITY_ON
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Height0:
+        m_Texture: {fileID: 2800000, guid: 5e41970cf49aaa144bc9db7003e6288e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Height01:
+        m_Texture: {fileID: 2800000, guid: 5e41970cf49aaa144bc9db7003e6288e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Height02:
+        m_Texture: {fileID: 2800000, guid: 784e869527a2d234aa742b81f8e4924b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal01:
+        m_Texture: {fileID: 2800000, guid: c6d1d22ad2eaf8843afc043435e6125a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal02:
+        m_Texture: {fileID: 2800000, guid: b653e83659aca6b49ad60d31185c12ca, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_Height01:
+        m_Texture: {fileID: 2800000, guid: 5e41970cf49aaa144bc9db7003e6288e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_Height02:
+        m_Texture: {fileID: 2800000, guid: 784e869527a2d234aa742b81f8e4924b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_Normal01:
+        m_Texture: {fileID: 2800000, guid: c6d1d22ad2eaf8843afc043435e6125a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_Normal02:
+        m_Texture: {fileID: 2800000, guid: b653e83659aca6b49ad60d31185c12ca, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_Water_height:
+        m_Texture: {fileID: 2800000, guid: 5e41970cf49aaa144bc9db7003e6288e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_Water_height_1:
+        m_Texture: {fileID: 2800000, guid: 784e869527a2d234aa742b81f8e4924b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_Water_normal:
+        m_Texture: {fileID: 2800000, guid: c6d1d22ad2eaf8843afc043435e6125a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_Water_normal_1:
+        m_Texture: {fileID: 2800000, guid: b653e83659aca6b49ad60d31185c12ca, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_water_N01:
+        m_Texture: {fileID: 2800000, guid: c0ddd835022a37b40b123522bcefbe74, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture0:
+        m_Texture: {fileID: 2800000, guid: c6d1d22ad2eaf8843afc043435e6125a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _01_int: 0.8
+    - _BorderOpacity: 1
+    - _ChromaticAberration: 0.1
+    - _Cutoff: 0.5
+    - _EdgeLength: 15
+    - _Float2: 0.878
+    - _Float3: 0.5
+    - _Glossiness: 0.5
+    - _Height011: 0.1
+    - _Height011_int: 0.1
+    - _Height012: 0.1
+    - _Height012_int: 0.1
+    - _Height01_int: 0
+    - _Height02: 0.5
+    - _Height021: 0.1
+    - _Height022: 0.1
+    - _Height_int: -0
+    - _Metallic: 0
+    - _Noise_int: 0.4
+    - _Normal011: 0.927
+    - _Normal011_flatten: 0.96
+    - _Normal012: 0.94
+    - _Normal012_flatten: 0.973
+    - _Normal01_flatten: 0.565
+    - _Normal01_int: 1.18
+    - _Normal021: 0.913
+    - _Normal022: 0.927
+    - _Normal02_int: 0.5
+    - _Normal1_flatten: 0.89
+    - _Normal1_int: 0.52
+    - _Normal_flatten: 0.557
+    - _Normal_int: 1
+    - _Smoothness: 1
+    - _Speed: 0.35
+    - _Speed01: 0.4
+    - _Speed02: 1
+    - _TILING03: 0.3
+    - _TessMax: 28.09
+    - _TessMin: 5.74
+    - _TessValue: 32
+    - _Tiling: 0.04
+    - _Tiling01: 0.03
+    - _Tiling02: 0.27
+    - _Tiling_Noise: 0.5
+    - __dirty: 0
+    - _opacity: 1
+    - _tiling02: 0.05
+    m_Colors:
+    - _Color: {r: 0.10191394, g: 0.14413929, b: 0.21323532, a: 1}
+    - _Color0: {r: 0.29044116, g: 0.42195737, b: 0.5, a: 0}
+    - _Color01: {r: 0.121323526, g: 0.19143006, b: 0.25, a: 0}
+    - _Color02: {r: 0.12067475, g: 0.19914691, b: 0.2647059, a: 0}
