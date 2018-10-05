@@ -143,8 +143,12 @@ public class FloatingObjectAnimations : MonoBehaviour {
 			float sign = (currentSideAngle != 0 ) ? Mathf.Sign(currentSideAngle) : 0; //On récupère le signe de l'angle pour appliquer la gravité dans le sens inverse.
 			currentSideAngularVelocity -= sideGravity * timeTick * sign; //On ajoute la vélocité.
 		}
-
-		currentSideAngularVelocity *= (1 - Time.fixedDeltaTime * sideDrag); //Formule permettant de calculer le drag sur la vélocité. En gros la résistance de l'air pour qu'il n'y est pas de mouvement infini.
+		
+		//Formule permettant de calculer le drag sur la vélocité. En gros la résistance de l'air pour qu'il n'y est pas de mouvement infini.
+		//UPDATE : J'ai récemment trouvé que la formule que j'utilisais (*= 1 - drag) n'était pas la formule de drag du Rigidbody contrairement à ce que j'avais vu. La nouvelle formule est meilleure car pas de risque de valeurs négatives.
+		currentSideAngularVelocity /= (1 + Time.fixedDeltaTime * sideDrag);
+		//UPDATE : Pendant que j'y suis, j'ai rajouté un threshold à la vélocité angulaire pour éviter les vibrations. Je l'ai hardcodé, mais tu peux modifier le Threshold si tu veux.
+		currentSideAngularVelocity = (currentSideAngularVelocity <= 0.001f) ? 0 : currentSideAngularVelocity;
 		currentSideAngle += currentSideAngularVelocity * timeTick; //On fait bouger l'angle grâce à la vélocité angulaire.
 	}
 
